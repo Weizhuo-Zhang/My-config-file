@@ -32,8 +32,8 @@ set smartcase
 set smartindent
 set smarttab
 set softtabstop=4
-set syntax=on
 set tabstop=4
 set textwidth=80
 set ts=4
 set tags+=./tags,../tags,../../tags,../../../tags
+syntax on
