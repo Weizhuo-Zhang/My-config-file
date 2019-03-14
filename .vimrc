@@ -1,5 +1,6 @@
 set autochdir
 set ruler
+set vb t_vb=
 
 set number
 set cursorline
@@ -29,7 +30,7 @@ set softtabstop=4
 syntax enable
 syntax on
 
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "
+set statusline=%F%m%r%h%w\ [POS=%04l,%04v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "
 set laststatus=2
 
 autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()"
