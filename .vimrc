@@ -7,6 +7,7 @@ set cursorline
 
 set hlsearch
 set incsearch
+set showcmd
 
 set ts=4
 set expandtab
@@ -30,10 +31,11 @@ set softtabstop=4
 syntax enable
 syntax on
 
-set statusline=%F%m%r%h%w\ [POS=%04l,%04v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "
+set statusline=%F%m%r%h%w\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "
+"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "
 set laststatus=2
 
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()"
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java,*.py exec ":call SetTitle()"
 func SetTitle()
     if &filetype == 'sh'
         call setline(1,"\#########################################################################")
@@ -44,6 +46,14 @@ func SetTitle()
         call append(line(".")+4, "\#########################################################################")
         call append(line(".")+5, "\#!/bin/bash")
         call append(line(".")+6, "")
+    elseif &filetype == 'python'
+        call setline(1,"\#########################################################################")
+        call append(line("."), "\# File Name: ".expand("%"))
+        call append(line(".")+1, "\# Author: Weizhuo Zhang (Ray)")
+        call append(line(".")+2, "\# mail: wzhuo.zhang@gmail.com")
+        call append(line(".")+3, "\# Created Time: ".strftime("%c"))
+        call append(line(".")+4, "\#########################################################################")
+        call append(line(".")+5, "")
     else
         call setline(1, "/*************************************************************************")
         call append(line("."), "    > File Name: ".expand("%"))
@@ -66,7 +76,6 @@ func SetTitle()
         call append(line(".")+8, "int main(int argc, char** argv){")
         call append(line(".")+9, "")
         call append(line(".")+10, "}")
-
     endif
     autocmd BufNewFile * normal G
 endfunc
@@ -91,7 +100,7 @@ func! CompileRunGcc()
         :!./%
     endif
 endfunc
-"C,C++的调试
+"C,C++ Debug
 map <F8> :call Rungdb()<CR>
 func! Rungdb()
     exec "w"
