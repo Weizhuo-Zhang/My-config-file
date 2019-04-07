@@ -115,3 +115,5 @@ fi
 
 alias ls='ls --color=always'
 alias grep='grep --color'
+
+export TERM=screen-256color
